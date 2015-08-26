@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<task:scheduler id="myScheduler" pool-size="3" />
+	<task:scheduled-tasks scheduler="myScheduler" >
+		<task:scheduled ref="breath" method="breatheIn" cron="50/2 2 3 1,2,15-17,20-31/2 12 ?" />
+<!-- 		<task:scheduled ref="breath" method="breatheOut" cron="1/2 * * * * *" /> -->
+	</task:scheduled-tasks>
+
+	<bean id="breath" class="cn.zno.job.Breathe" />
+</beans>
